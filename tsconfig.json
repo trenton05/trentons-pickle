@@ -1,0 +1,15 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "lib": ["ES2015"],
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "lib/",
+    "sourceMap": true,
+    "target": "es6",
+    "strictNullChecks": true
+  }
+}
