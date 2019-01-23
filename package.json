@@ -1,6 +1,6 @@
 {
   "name": "trentons-pickle",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "Cucumber utility library",
   "main": "lib/index.js",
   "scripts": {
@@ -24,24 +24,16 @@
   "homepage": "https://github.com/trenton05/trentons-pickle#readme",
   "dependencies": {
     "chance": "1.0.6",
-    "cucumber-tsflow": "1.1.2",
     "gulp": "^4.0.0",
     "gulp-typescript": "^4.0.1",
     "jwt-simple": "0.5.1",
     "lodash": "^4.17.11",
     "long": "3.2.0",
     "process": "0.11.9",
-    "protractor": "^5.1.2",
     "request": "^2.88.0",
-    "selenium-webdriver": "3.4.0",
     "typescript": "^2.7.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.2",
-    "@types/mocha": "^2.2.48",
-    "chai": "^4.1.2",
-    "mocha": "^5.0.1",
-    "ts-node": "^5.0.0",
-    "typings": "^2.1.1"
+    "ts-node": "^5.0.0"
   }
 }

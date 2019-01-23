@@ -1,8 +1,8 @@
 import { binding } from 'cucumber-tsflow';
 
-import { mapping } from '../mapping';
+import { mapping } from './mapping';
 import { $, $$, by, element, ElementFinder } from 'protractor';
-import { BrowserUtil } from '../browser-util';
+import { BrowserUtil } from './browser-util';
 declare const document: any;
 
 const cssContainingTextInsensitive = (cssSelector: string, searchText: string, using?) => {

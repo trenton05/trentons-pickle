@@ -1,4 +1,3 @@
-import { Log } from './log';
 /* Usages:
  @mapping
  "login button": ".login-button"
@@ -87,9 +86,9 @@ export function mapping(target?: Object | RegExp | string | string[], value?: Ma
       const returnValue = getMapping(target);
       return Promise.resolve(returnValue).then((val) => {
         if (val && val.elementArrayFinder_ && val.elementArrayFinder_.locator_) {
-          Log.debug(target + ' mapped to ' + val.elementArrayFinder_.locator_);
+          console.log(target + ' mapped to ' + val.elementArrayFinder_.locator_);
         } else {
-          Log.debug(target + ' mapped to ' + val);
+          console.log(target + ' mapped to ' + val);
         }
         return val;
       });
