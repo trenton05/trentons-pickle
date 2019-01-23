@@ -25,7 +25,7 @@
  }
 */
 export type MappingValue = any | Promise<any> | ((...args: string[]) => any | Promise<any>);
-const mappings: { regex: RegExp, value: MappingValue, length: number, obj: any }[] = [];
+export const mappings: { regex: RegExp, value: MappingValue, length: number, obj: any }[] = [];
 function addMapping(obj: any, key: RegExp | string, value: MappingValue): void {
   let regex: RegExp;
   if (key instanceof RegExp) {
@@ -34,6 +34,7 @@ function addMapping(obj: any, key: RegExp | string, value: MappingValue): void {
     const plural = key.charAt(key.length - 1) === 'y' ? key.substring(0, key.length - 1) + '(y|ies)?' : key + '(s|es)?';
     regex = new RegExp('^(the |a |an )?' + plural + '(s|es)?$', 'i');
   }
+  console.log(`Mapping ${regex.source} => ${typeof value === 'function' ? value.name : value}`);
   mappings.push({ regex, obj, value, length: regex.toString().length });
 }
 
