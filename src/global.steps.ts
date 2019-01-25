@@ -62,26 +62,6 @@ export default class GlobalSteps {
     });
   }
 
-  @given(/^Local storage is empty$/i)
-  public async emptyLocalStorage(): Promise<void> {
-    await browser.executeScript('window.localStorage.clear();');
-  }
-
-  @given(/^Session storage is empty$/i)
-  public async emptySessionStorage(): Promise<void> {
-    await browser.executeScript('window.sessionStorage.clear();');
-  }
-
-  @then(/I log the browser console called '(.*)'/)
-  public async logConsole(name: string): Promise<void> {
-    await captureLogs(name);
-  }
-
-  @given(/^wait for Angular is (on|off)$/i)
-  public async setWaitForAngular(enabledStr: string): Promise<any> {
-    browser.waitForAngularEnabled(enabledStr === 'on');
-  }
-
   @when(/^I (?:reload|refresh) the page$/i)
   public async reloadPage(): Promise<void> {
     await browser.driver.navigate().refresh();

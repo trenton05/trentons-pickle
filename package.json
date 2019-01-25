@@ -1,6 +1,6 @@
 {
   "name": "trentons-pickle",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Cucumber utility library",
   "main": "lib/index.js",
   "scripts": {
