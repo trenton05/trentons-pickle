@@ -13,6 +13,13 @@ const cssContainingTextInsensitive = (cssSelector: string, searchText: string, u
   elements.forEach((e) => {
     const elementText = e.textContent || e.innerText || '';
     if (elementText.replace(/\s+/g, ' ').toLowerCase().indexOf(searchText.replace(/\s+/g, ' ').toLowerCase()) > -1) {
+      let parent = e.parentNode;
+      while (parent && matches.length > 0 && matches[matches.length - 1] !== parent) {
+        parent = parent.parentNode;
+      }
+      if (parent && matches.length > 0) {
+        matches.pop();
+      }
       matches.push(e);
     }
   });
@@ -37,6 +44,19 @@ const cssContainingInputWithValue = (cssSelector: string, searchText: string, us
     return matches;
 };
 by.addLocator('cssContainingInputWithValue', cssContainingInputWithValue);
+
+mapping('button', 'button');
+mapping('text area', 'textarea');
+mapping('text input', 'input[type=text]');
+mapping('checkbox', 'input[type=checkbox]');
+mapping('image', 'img');
+mapping('radio button', 'input[type=radio]');
+mapping('div', 'div');
+mapping('span', 'span');
+mapping('element', '*');
+mapping('paragraph', 'p');
+mapping('option', 'option');
+mapping('select', 'select');
 
 @binding()
 export default class CssSteps {
