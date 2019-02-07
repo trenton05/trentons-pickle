@@ -1,6 +1,6 @@
 {
   "name": "trentons-pickle",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "Cucumber utility library",
   "main": "lib/index.js",
   "scripts": {
@@ -34,6 +34,8 @@
     "typescript": "^2.7.2"
   },
   "devDependencies": {
+    "@types/protractor": "^4.0.0",
+    "@types/webdriverio": "^4.10.3",
     "ts-node": "^5.0.0"
   }
 }

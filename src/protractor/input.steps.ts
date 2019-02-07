@@ -1,7 +1,7 @@
 import { binding, when } from 'cucumber-tsflow';
 import { browser, by, element, ElementFinder, ExpectedConditions, Key } from 'protractor';
 
-import { mapping } from './mapping';
+import { mapping } from '../mapping';
 import { BrowserUtil } from './browser-util';
 import { WebElement } from 'selenium-webdriver';
 import * as path from 'path';

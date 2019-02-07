@@ -1,6 +1,6 @@
 import { binding } from 'cucumber-tsflow';
 
-import { mapping } from './mapping';
+import { mapping } from '../mapping';
 import { $, $$, by, element, ElementFinder } from 'protractor';
 import { BrowserUtil } from './browser-util';
 declare const document: any;
@@ -11,7 +11,8 @@ const cssContainingTextInsensitive = (cssSelector: string, searchText: string, u
   const elements = using.querySelectorAll(cssSelector);
   const matches: any[] = [];
   elements.forEach((e) => {
-    const elementText = e.textContent || e.innerText || '';
+    const elementText = (e.textContent || e.innerText || '')
+      + ' ' + e.attributes.map(a => a.value).join(' ');
     if (elementText.replace(/\s+/g, ' ').toLowerCase().indexOf(searchText.replace(/\s+/g, ' ').toLowerCase()) > -1) {
       let parent = e.parentNode;
       while (parent && matches.length > 0 && matches[matches.length - 1] !== parent) {

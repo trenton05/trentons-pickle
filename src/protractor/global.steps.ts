@@ -1,5 +1,5 @@
 import { binding, given, then, when } from 'cucumber-tsflow';
-import { mapping } from './mapping';
+import { mapping } from '../mapping';
 import { browser, ExpectedConditions } from 'protractor';
 import * as Chance from 'chance';
 import { BrowserUtil } from './browser-util';

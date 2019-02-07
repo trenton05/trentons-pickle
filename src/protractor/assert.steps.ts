@@ -1,6 +1,6 @@
 import {binding, then} from 'cucumber-tsflow';
 import { $, browser, ExpectedConditions, ElementFinder, ElementArrayFinder, $$, by } from 'protractor';
-import {mapping} from './mapping';
+import {mapping} from '../mapping';
 import {BrowserUtil} from './browser-util';
 import {scrollIntoView} from './input.steps';
 import {falseIfMissing} from 'protractor/built/util';
