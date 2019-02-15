@@ -11,8 +11,10 @@ const cssContainingTextInsensitive = (cssSelector: string, searchText: string, u
   const elements = using.querySelectorAll(cssSelector);
   const matches: any[] = [];
   elements.forEach((e) => {
-    const elementText = (e.textContent || e.innerText || '')
-      + ' ' + e.attributes.map(a => a.value).join(' ');
+    let elementText = (e.textContent || e.innerText || '');
+    for (let i = 0; i < e.attributes.length; i++) {
+      elementText += ' ' + e.attributes[i].value;
+    }
     if (elementText.replace(/\s+/g, ' ').toLowerCase().indexOf(searchText.replace(/\s+/g, ' ').toLowerCase()) > -1) {
       let parent = e.parentNode;
       while (parent && matches.length > 0 && matches[matches.length - 1] !== parent) {
@@ -48,6 +50,7 @@ by.addLocator('cssContainingInputWithValue', cssContainingInputWithValue);
 
 mapping('button', 'button');
 mapping('text area', 'textarea');
+mapping('input', 'input');
 mapping('text input', 'input[type=text]');
 mapping('checkbox', 'input[type=checkbox]');
 mapping('image', 'img');

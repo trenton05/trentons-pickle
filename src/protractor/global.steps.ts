@@ -9,7 +9,7 @@ const chance = new Chance();
 @binding()
 export default class GlobalSteps {
 
-  @mapping(/^random (.*)$/i)
+  @mapping(/^(?:a |an |the )?random (.*)$/i)
   static async randomMapping(type: string): Promise<string> {
     return chance[type]();
   }
