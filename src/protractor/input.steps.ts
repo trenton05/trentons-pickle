@@ -14,6 +14,19 @@ export default class InputSteps {
     all ? await clickAll(eltMatch) : await click(eltMatch);
   }
 
+  @when(/^I move my mouse over (.*) and down (.*?)( and click)?$/i)
+  public async movePosition(x: string, y: string, click: boolean): Promise<void> {
+    const result = browser.actions().mouseMove({x: Number(await mapping(x)), y: Number(await mapping(y))});
+    await (click ? result.click() : result).perform();
+  }
+
+  @when(/^I move my mouse to (.*?)( and click)?$/i)
+  public async moveElement(eltMatch: string, click: boolean): Promise<void> {
+    const finder = BrowserUtil.finder(await mapping(eltMatch));
+    const result = browser.actions().mouseMove(finder);
+    await (click ? result.click() : result).perform();
+  }
+
   @when(/^I hover over (.*)$/i)
   public async hover(eltMatch: string): Promise<void> {
     const waitForAngular: boolean = await browser.waitForAngularEnabled();

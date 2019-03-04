@@ -10,26 +10,30 @@ export default class InputSteps {
 
   @when(/^I click (all )?(?:of )?(.*)$/i)
   public async clickStep(all: boolean, eltMatch: string): Promise<void> {
-    all ? await clickAll(eltMatch) : await click(eltMatch);
+    await BrowserUtil.safeWait(async () => {
+      all ? await clickAll(eltMatch) : await click(eltMatch);
+    });
   }
 
   @when(/^I (clear and )?(click into and )?enter (.*) into (.*)$/i)
   public async enterTextStep(clearText: string, clickText: string, textMatch: string, eltMatch: string): Promise<void> {
-    const [text]: [string] = await mapping([textMatch]);
-    await enterText(eltMatch, text, clearText != null && clearText.length > 0, clickText != null && clickText.length > 0);
+    await BrowserUtil.safeWait(async () => {
+      const [text]: [string] = await mapping([textMatch]);
+      await enterText(eltMatch, text, clearText != null && clearText.length > 0, clickText != null && clickText.length > 0);
+    });
   }
 }
 
 export async function enterText(field: string, text: string, shouldClear: boolean, shouldClick: boolean): Promise<any> {
   const [elt]: [string] = await mapping([field]);
-  const finder = BrowserUtil.finder(elt);
+  const finder = await BrowserUtil.finder(elt);
   await finder.scroll();
   await finder.waitForVisible();
   if (shouldClear) {
 
     const textValue = await finder.getValue();
     for (let i = 0; i < textValue.length; i++) {
-      finder.keys(Key.BACK_SPACE);
+      await finder.keys(Key.BACK_SPACE);
     }
   }
 
@@ -57,15 +61,15 @@ export async function enterText(field: string, text: string, shouldClear: boolea
   }
 
   if (list.length > 0) {
-    finder.keys(list);
+    await finder.keys(list);
   } else {
-    finder.keys(text);
+    await finder.keys(text);
   }
 }
 
 export async function click(field: string): Promise<any> {
   const elt: any = await mapping(field);
-  const finder = BrowserUtil.finder(elt);
+  const finder = await BrowserUtil.finder(elt);
   await finder.scroll();
   await finder.waitForVisible();
   await finder.click();
@@ -74,7 +78,7 @@ export async function click(field: string): Promise<any> {
 export async function clickAll(field: string): Promise<any> {
   const elt: any = await mapping(field);
 
-  await BrowserUtil.doAll(elt, async (f: ElementFinder) => {
+  await await BrowserUtil.doAll(elt, async (f: ElementFinder) => {
     await f.scroll();
     await f.waitForVisible();
     await f.click();

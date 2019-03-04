@@ -9,9 +9,14 @@ const chance = new Chance();
 @binding()
 export default class GlobalSteps {
 
-  @mapping(/^(?:a |an |the )?random (.*)$/i)
-  static async randomMapping(type: string): Promise<string> {
-    return chance[type]();
+  @mapping(/^(?:a |an |the )?random ([^ ]*)(?: (?:with |and )([^ ]+) ([^ ]+))*$/i)
+  static async randomMapping(type: string, ...props): Promise<string> {
+    const options = {};
+    for (let i = 0; i < props.length; i += 2) {
+      const v = props[i + 1];
+      options[props[i]] = !isNaN(Number(v)) ? Number(v) : v === 'true' ? true : v === 'false' ? false : v;
+    }
+    return chance[type](options);
   }
 
   @when(/^I navigate to (.*)$/i)
@@ -34,12 +39,9 @@ export default class GlobalSteps {
   }
 
   @given(/^Random (.*) as (.*)$/i)
-  public randomString(type: string, name: string): void {
-    if (type === 'id') {
-      return mapping(name, IdUtil.randomId());
-    } else {
-      return mapping(name, chance[type]());
-    }
+  public async randomString(type: string, name: string) {
+    let val = await mapping(`random ${type}`);
+    return mapping(name, val);
   }
 
   @given(/^The text in (.*) as (.*)$/i)

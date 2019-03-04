@@ -96,7 +96,7 @@ export default class InputSteps {
     });
   }
 
-  @then(/^(.*) is hidden$/i)
+  @then(/^(.*) is (?:not visible|hidden)$/i)
   public async hidden(eltMatch: string): Promise<void> {
     const elt: any = await mapping(eltMatch);
     const finder = BrowserUtil.finder(elt);
